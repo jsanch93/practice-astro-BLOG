@@ -1,0 +1,31 @@
+---
+const siteName = 'Digital Garden'
+
+const {pageTitle} = Astro.props
+
+const allProjects = await Astro.glob('../pages/projects/*.md');
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{siteName} : {pageTitle}</title>
+	</head>
+	<body>
+	
+		<slot />
+
+	</body>
+
+<!-- Get the projects -->
+{
+	allProjects.map( project => 
+		// <p>{project.frontmatter.title}</p>
+		<a href={project.url}>{project.frontmatter.title}</a>
+	)
+}
+
+</html>
